@@ -1,3 +1,4 @@
+import './Gallery.scss'
 import React from 'react';
 
 import { ImageBox } from '../ImageBox/ImageBox';

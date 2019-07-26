@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/AndreyOsipuk/ReactJS#readme",
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "webpack": "^4.36.1",

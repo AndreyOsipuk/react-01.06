@@ -1,3 +1,4 @@
+import './Likes.scss';
 import React from 'react';
 
 export class Likes extends React.Component {
