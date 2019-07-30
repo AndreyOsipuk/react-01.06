@@ -1,16 +1,27 @@
 import './Gallery.scss'
 import React from 'react';
 
-import { ImageBox } from '../ImageBox/ImageBox';
+import { ImageBox } from '../ImageBox';
 
-export class Gallery extends React.Component {
+export function Gallery(props) {
+    const { pictures, renderItem } = props;
 
-    render() {
-        const { pictures } = this.props;
+    const renderItemdefault = (picture) => {
         return (
-            <div className="gallery">
-                {pictures.map((picture, idx) => <ImageBox key={idx} {...picture} />)}
-            </div>
-        )
+            <ImageBox key={picture.id} {...picture} />
+        );
     }
+
+    return (
+        <main>
+            <div className="container">
+                {pictures.length === 0 && <span>Loading...</span>}
+                {pictures.length > 0 &&
+                    <div className="gallery">
+                        {pictures.map(renderItem ? renderItem : renderItemdefault)}
+                    </div>
+                }
+            </div>
+        </main>
+    )
 }

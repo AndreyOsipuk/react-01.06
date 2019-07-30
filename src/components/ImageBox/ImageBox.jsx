@@ -1,7 +1,7 @@
 import './ImageBox.scss';
 import React, { Component } from 'react';
-import { Likes } from '../Likes/Likes';
-import { Comments } from '../Comments/Comments';
+import { Likes } from '../Likes';
+import { Comments } from '../Comments';
 
 export class ImageBox extends Component {
     render() {
