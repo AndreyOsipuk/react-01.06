@@ -1,0 +1,57 @@
+{
+  "name": "ReactJS",
+  "version": "1.0.0",
+  "description": "скрипты запуска     все установленные пакеты #package-lock.json     все установленные пакеты",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node createIndex.js | concurrently \"npm run client:start\" \"npm run server:start\"",
+    "client:start": "webpack-dev-server --mode development",
+    "client:build": "rimraf ./dist && webpack --mode production",
+    "server:start": "node server",
+    "server:seeds": "node server/seeds"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyOsipuk/ReactJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyOsipuk/ReactJS/issues"
+  },
+  "homepage": "https://github.com/AndreyOsipuk/ReactJS#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "faker": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.1.0",
+    "file-loader": "^4.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "rimraf": "^2.6.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.3",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
