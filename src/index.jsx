@@ -36,23 +36,6 @@ class App extends Component {
         event.preventDefault();
     }
 
-    componentDidMount() {
-        // if (!this.bottom) window.addEventListener('scroll', this.handleScroll, true);
-    };
-
-    componentWillUnmount() {
-        // window.removeEventListener('scroll', this.handleScroll, true);
-    };
-
-    handleScroll = (event) => {
-        // if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
-        //     console.log("bottom");
-        //     this.setState({
-        //         displayLoader: true,
-        //     });
-        // }
-    };
-
     handleModalClose = () => {
         this.setState({
             isModalVisible: false,
@@ -65,6 +48,7 @@ class App extends Component {
             //Сделать Боковой значек
             //На сервере, в seeds добавить flowing & flowers
             //Cделать profileContainer
+            //margin снизу для body
             <Fragment>
                 <p>Corbin78@gmail.com</p>
                 <button onClick={this.handleSignOut}>Sign Out</button>

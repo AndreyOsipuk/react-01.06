@@ -1,14 +1,30 @@
 import './Gallery.scss'
-import React from 'react';
+
+import React, { Component, useEffect, Fragment } from 'react';
 
 import { ImageBox } from '../ImageBox';
 
 export function Gallery(props) {
-    const { pictures, renderItem } = props;
+    const { pictures, renderItem, onScroll, loading } = props;
+    const handleScroll = () => {
+        if (parseInt(window.innerHeight + document.documentElement.scrollTop) != document.documentElement.offsetHeight) {
+            return;
+        }
+        
+        if (typeof onScroll == 'function') {
+            onScroll();
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const renderItemdefault = (picture) => {
         return (
-            <ImageBox key={picture.id} {...picture} />
+                <ImageBox key={picture.id} {...picture} />
         );
     }
 

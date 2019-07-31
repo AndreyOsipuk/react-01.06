@@ -52,13 +52,13 @@ app.post('/auth', async (req, res) => {
 app.all('/api*', verifyToken);
 
 app.get('/api/photos', async (req, res) => {
-  const { page = 1, limit = 15 } = req.query;
+  const { page = 1, limit = 15, count } = req.query;
   const photos = await Picture.find()
     .populate([
       'comments.user',
       'likes.user',
       'owner'
-    ]).skip(limit * (page - 1)).limit(limit);
+    ]).skip(+count).limit(+limit);
   const total = await Picture.countDocuments();
   res.json({
     page,
