@@ -1,12 +1,17 @@
 import React, { Component, Fragment } from 'react'
+import { Switch, Route } from 'react-router-dom';
 
 import { Gallery } from 'components/Gallery';
 import { Loader } from 'components/Loader';
+import { PostContainer } from 'containers/PostContainer';
 
 export class GalleryContainer extends Component {
     state = { pictures: [], loading: false, page: 1, total: null }
 
     componentDidMount() {
+        if (!localStorage.getItem('token')) {
+            return this.props.history.replace('/auth');
+        }
         this.loadItems();
     }
 
@@ -15,10 +20,10 @@ export class GalleryContainer extends Component {
         const { token } = this.props;
         const { page } = this.state;
         const count = this.state.pictures.length;
-        fetch(`http://localhost:8888/api/photos?page=${page}&count=${count}&limit=6`, {
+        fetch(`http://localhost:8888/api/photos?page=${page}&limit=6`, {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
+                'authorization': `Bearer ${localStorage.getItem('token')}`,
             },
         })
             .then(response => response.json())
@@ -65,7 +70,8 @@ export class GalleryContainer extends Component {
                     <option value="9">9</option>
                     <option value="12">12</option>
                 </select> */}
-                {pictures.length > 0 && <Gallery loading={this.state.loading} onScroll={this.handleScroll} pictures={pictures} />}
+                {pictures.length > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures} />}
+                <Route path="/posts/:id" component={PostContainer} />
                 {loading && <Loader />}
             </Fragment>
         )

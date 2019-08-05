@@ -5,9 +5,10 @@ import React, { Component, useEffect, Fragment } from 'react';
 import { ImageBox } from '../ImageBox';
 
 export function Gallery(props) {
-    const { pictures, renderItem, onScroll, loading } = props;
+    const { pictures, renderItem, onScroll } = props;
     const handleScroll = () => {
-        if (parseInt(window.innerHeight + document.documentElement.scrollTop) != document.documentElement.offsetHeight) {
+
+        if (parseInt(Math.ceil(window.innerHeight + document.documentElement.scrollTop)) != document.documentElement.offsetHeight) {
             return;
         }
         
@@ -22,9 +23,9 @@ export function Gallery(props) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const renderItemdefault = (picture) => {
+    const renderItemdefault = (picture, idx) => {
         return (
-                <ImageBox key={picture.id} {...picture} />
+                <ImageBox key={idx} {...picture} />
         );
     }
 

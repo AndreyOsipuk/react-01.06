@@ -9,6 +9,11 @@ export class Auth extends Component {
         password: '',
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('token')) {
+            return this.props.history.replace('/');
+        }
+    }
     handleSignIn = () => {
         const { onSuccess } = this.props;
         const { username, password } = this.state;

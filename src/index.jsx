@@ -2,6 +2,7 @@ import './assets/global.scss';
 
 import React, { Component, Fragment } from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 import { Profile } from 'components/Profile';
 import { GalleryContainer } from 'containers/GalleryContainer';
@@ -34,6 +35,7 @@ class App extends Component {
             localStorage.removeItem('id');
         });
         event.preventDefault();
+        this.props.history.replace('/')
     }
 
     handleModalClose = () => {
@@ -49,14 +51,20 @@ class App extends Component {
             //На сервере, в seeds добавить flowing & flowers
             //Cделать profileContainer
             //margin снизу для body
+            //Разобраться с route 4
             <Fragment>
-                <p>Corbin78@gmail.com</p>
-                <button onClick={this.handleSignOut}>Sign Out</button>
+                <p>Jovanny_Sauer@gmail.com</p>
+                {token && <button onClick={this.handleSignOut}>Sign Out</button>}
                 {!token && <Auth onSuccess={this.handleSuccess} />}
+                <Link to='/'>Home</Link>
+                <Link to='/auth'>Auth</Link>
+                <Switch>
+                    <Route path='/' component={GalleryContainer} />
+                    {/* <Route path='/auth' component={<Auth onSuccess={this.handleSuccess} />} exact /> */}
+                </Switch>
                 {token &&
                     <Fragment>
                         <Profile token={token} id={id} />
-                        <GalleryContainer token={token} />
                         {isModalVisible &&
                             <Modal onClose={this.handleModalClose} title="Hi! I'm modal">
                                 <div>A circular color picker component also named color-wheel performed with react and pure svg. Mobile compatible.</div>
@@ -69,4 +77,9 @@ class App extends Component {
     }
 }
 
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+    document.getElementById('root')
+);

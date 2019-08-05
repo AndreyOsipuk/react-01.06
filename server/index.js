@@ -51,14 +51,22 @@ app.post('/auth', async (req, res) => {
 
 app.all('/api*', verifyToken);
 
+// app.get('/api/photos', async (req, res) => {
+//   const { limit = 15, count } = req.query;
+//   const photos = await Picture.find()
+//     .populate([
+//       'comments.user',
+//       'likes.user',
+//       'owner'
+//     ]).skip(+count).limit(+limit);
 app.get('/api/photos', async (req, res) => {
-  const { page = 1, limit = 15, count } = req.query;
+  const { page = 1, limit = 15 } = req.query;
   const photos = await Picture.find()
     .populate([
       'comments.user',
       'likes.user',
       'owner'
-    ]).skip(+count).limit(+limit);
+    ]).skip(+limit * (+page - 1)).limit(+limit);
   const total = await Picture.countDocuments();
   res.json({
     page,

@@ -8,7 +8,10 @@ const request = require('request');
 const User = require('../models/user');
 const Picture = require('../models/picture');
 
-function rand(max = 100) {
+const maxUsers = 10;
+const maxPictures = 100;
+
+function rand(max = 10) {
   return Math.floor(Math.random() * max);
 }
 
@@ -27,7 +30,8 @@ async function importSeeds() {
   await Picture.deleteMany({});
 
   const users = [];
-  for(let i = 0; i < 100; i++) {
+  //users
+  for (let i = 0; i < maxUsers; i++) {
     let user = new User({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -38,20 +42,20 @@ async function importSeeds() {
     });
 
     user = await user.save();
-    console.log(`Created user ${user.firstName} ${user.lastName}`);
+    console.log(`Created user ${i}/${maxUsers} ${user.firstName} ${user.lastName}`);
     users.push(user);
   }
-
-  for(let i = 0; i < 100; i++) {
+  //pictures
+  for (let i = 0; i < maxPictures; i++) {
     const randOwner = users[rand()];
-    
+
     const likes = [];
     const comments = [];
 
     const likesCount = rand(10);
     const commentsCount = rand();
 
-    for(let j = 0; j < likesCount; j++) {
+    for (let j = 0; j < likesCount; j++) {
       const randUser = users[rand()];
       likes.push({
         user: randUser,
@@ -59,7 +63,7 @@ async function importSeeds() {
       });
     }
 
-    for(let j = 0; j < commentsCount; j++) {
+    for (let j = 0; j < commentsCount; j++) {
       const randUser = users[rand()];
       comments.push({
         user: randUser,
@@ -77,7 +81,7 @@ async function importSeeds() {
 
     await picture.save();
 
-    console.log(`Created picture for ${randOwner.firstName} ${randOwner.lastName}`);
+    console.log(`Created picture for ${i}/${maxPictures} ${randOwner.firstName} ${randOwner.lastName}`);
   }
 
   process.exit();
