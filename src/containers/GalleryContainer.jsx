@@ -3,10 +3,19 @@ import { Switch, Route } from 'react-router-dom';
 
 import { Gallery } from 'components/Gallery';
 import { Loader } from 'components/Loader';
+import { Profile } from 'components/Profile';
+
 import { PostContainer } from 'containers/PostContainer';
 
 export class GalleryContainer extends Component {
-    state = { pictures: [], loading: false, page: 1, total: null }
+    state = {
+        pictures: [],
+        loading: false,
+        page: 1,
+        total: null,
+        id: localStorage.getItem('id'),
+        token: localStorage.getItem('token'),
+    }
 
     componentDidMount() {
         if (!localStorage.getItem('token')) {
@@ -16,14 +25,12 @@ export class GalleryContainer extends Component {
     }
 
     loadItems = () => {
-        this.setState({ loading: true });
-        const { token } = this.props;
-        const { page } = this.state;
-        const count = this.state.pictures.length;
+        this.setState({ loading: true});
+        const { page, token } = this.state;
         fetch(`http://localhost:8888/api/photos?page=${page}&limit=6`, {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${localStorage.getItem('token')}`,
+                'authorization': `Bearer ${token}`,
             },
         })
             .then(response => response.json())
@@ -61,7 +68,7 @@ export class GalleryContainer extends Component {
     }
 
     render() {
-        const { pictures, loading } = this.state;
+        const { pictures, loading, token, id } = this.state;
         return (
             <Fragment>
                 {/* <select id="count">
@@ -70,6 +77,7 @@ export class GalleryContainer extends Component {
                     <option value="9">9</option>
                     <option value="12">12</option>
                 </select> */}
+                {token && <Profile token={token} id={id} />}
                 {pictures.length > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures} />}
                 <Route path="/posts/:id" component={PostContainer} />
                 {loading && <Loader />}

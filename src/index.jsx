@@ -4,10 +4,10 @@ import React, { Component, Fragment } from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
-import { Profile } from 'components/Profile';
 import { GalleryContainer } from 'containers/GalleryContainer';
 import { Auth } from 'components/Auth';
 import { Modal } from 'components/Modal';
+import { CommentsHoc } from 'components/CommentsHoc';
 
 class App extends Component {
     state = {
@@ -54,17 +54,24 @@ class App extends Component {
             //Разобраться с route 4
             <Fragment>
                 <p>Jovanny_Sauer@gmail.com</p>
+                <CommentsHoc />
                 {token && <button onClick={this.handleSignOut}>Sign Out</button>}
-                {!token && <Auth onSuccess={this.handleSuccess} />}
+                {/* {!token && <Auth onSuccess={this.handleSuccess} />} */}
                 <Link to='/'>Home</Link>
                 <Link to='/auth'>Auth</Link>
+                {/* {token && <Profile token={token} id={id} />} */}
                 <Switch>
-                    <Route path='/' component={GalleryContainer} />
+                    {/* {exact - cтрогое сравнение} */}
                     {/* <Route path='/auth' component={<Auth onSuccess={this.handleSuccess} />} exact /> */}
+                    <Route path='/' render={(props) => (
+                        <GalleryContainer {...props} />
+                    )} />
+                    <Route path='/auth' render={(props) => (
+                        <Auth {...props} onSuccess={this.handleSuccess} />
+                    )} />
                 </Switch>
                 {token &&
                     <Fragment>
-                        <Profile token={token} id={id} />
                         {isModalVisible &&
                             <Modal onClose={this.handleModalClose} title="Hi! I'm modal">
                                 <div>A circular color picker component also named color-wheel performed with react and pure svg. Mobile compatible.</div>

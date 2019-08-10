@@ -1,11 +1,14 @@
-import React from 'react';
+import './Comments.scss';
 
-export class Comments extends React.Component {
+import React, { PureComponent } from 'react';
+
+export class Comments extends PureComponent {
     render() {
         const { comments } = this.props;
         return (
-            <li className="gallery-item-comments"><span className="visually-hidden">Likes:</span><i className="fas fa-heart"
-                aria-hidden="true"></i> {comments}</li>
-        )
+            <ul>
+                {comments.map((comment, idx) => <li key={idx}>{comment.author}: {comment.text}</li>)}
+            </ul>
+        );
     }
 }

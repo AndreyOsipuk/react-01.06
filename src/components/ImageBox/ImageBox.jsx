@@ -3,9 +3,8 @@ import './ImageBox.scss';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Likes } from '../Likes';
-import { Comments } from '../Comments';
-
+import { LikesCount } from 'components/LikesCount';
+import { CommentsCount } from 'components/CommentsCount';
 export class ImageBox extends Component {
     render() {
         const { image, likes, comments, id } = this.props;
@@ -15,8 +14,8 @@ export class ImageBox extends Component {
                     <img src={image} className="gallery-image" alt="" />
                     <div className="gallery-item-info">
                         <ul>
-                            <Likes likes={likes} />
-                            <Comments comments={comments} />
+                            <LikesCount likes={likes} />
+                            <CommentsCount comments={comments} />
                         </ul>
                     </div>
                 </div>

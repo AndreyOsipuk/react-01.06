@@ -1,7 +1,7 @@
-import './Likes.scss';
+import './LikesCount.scss';
 import React from 'react';
 
-export class Likes extends React.Component {
+export class LikesCount extends React.Component {
     render() {
         const { likes } = this.props;
         return (

@@ -50,6 +50,12 @@
 `react-router-dom`: @5.0.1 react-router для работы в браузере,
 
 `axios`: работа с fetch,
+`flux`: flux,
+`redux`: redux,
+`redux-thunk`: middleware redux,
+`redux-logger`: middleware redux,
+`redux-promise-middleware`: middleware redux,
+`react-redux`: для связки react и redux,
 
 
     
