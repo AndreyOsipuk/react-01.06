@@ -56,6 +56,7 @@
 `redux-logger`: middleware redux,
 `redux-promise-middleware`: middleware redux,
 `react-redux`: для связки react и redux,
+`redux-actions`: доп. библиотека, помогает в создании actions,
 
 
     

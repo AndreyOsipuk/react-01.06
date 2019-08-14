@@ -10,6 +10,7 @@ export class Auth extends Component {
     }
 
     componentDidMount() {
+        console.log(localStorage.getItem('token'))
         if (localStorage.getItem('token')) {
             return this.props.history.replace('/');
         }
