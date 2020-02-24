@@ -8,13 +8,13 @@
 #node_mudules
 все файлы скачиваемых модулей
     
-#modules 
+#modules webpack
 `react`: работа с react
 `react-dom`: что бы реакт понимал dom
 
 `webpack`: вебпак
 `webpack-cli`: консольное управление вебпаком
-`webpack-dev-server`: локальный webpa / автоперезапуск сервера при изменении в коде
+`webpack-dev-server`: локальный сервер / автоперезапуск сервера при изменении в коде
 
 `@babel/core`: трансполятор, для понимания html тегов в js
 `@babel/preset-env`:  es6 in es5
@@ -42,6 +42,23 @@
 `rimraf`: очищает файлы в папке перед записью вебпака
 
 `prop-types`: проверка типов данных в props
+
+`bootstrap`: библиотека bootstarp,
+`jquery`: библиотека jquery,
+`popper`: дополинтельные зависимости bootstrap,
+`react-router@3`: 3 версия react router с вложенностью,
+`react-router-dom`: @5.0.1 react-router для работы в браузере,
+
+`axios`: работа с fetch,
+`flux`: flux,
+`redux`: redux,
+`redux-thunk`: middleware redux,
+`redux-logger`: middleware redux,
+`redux-promise-middleware`: middleware redux,
+`react-redux`: для связки react и redux,
+`redux-actions`: доп. библиотека, помогает в создании actions,
+
+
     
 
 #NodeJS

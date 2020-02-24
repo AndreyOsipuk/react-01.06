@@ -11,26 +11,26 @@ class Profile extends React.Component {
     state = { loading: true };
     componentDidMount() {
         const { token, id } = this.props;
-        fetch(`http://localhost:8888/api/users/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    avatar: data.avatar,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    bio: data.bio,
-                    email: data.email,
-                    loading: false,
-                })
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        // fetch(`http://localhost:8888/api/users/${id}`, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'authorization': `Bearer ${token}`,
+        //     },
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         this.setState({
+        //             avatar: data.avatar,
+        //             firstName: data.firstName,
+        //             lastName: data.lastName,
+        //             bio: data.bio,
+        //             email: data.email,
+        //             loading: false,
+        //         })
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
     }
 
     render() {

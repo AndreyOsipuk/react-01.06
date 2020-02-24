@@ -2,11 +2,14 @@ import './assets/global.scss';
 
 import React, { Component, Fragment } from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { Provider } from 'react-redux'
 
-import { Profile } from 'components/Profile';
 import { GalleryContainer } from 'containers/GalleryContainer';
 import { Auth } from 'components/Auth';
 import { Modal } from 'components/Modal';
+import { CommentsHoc } from 'components/CommentsHoc';
+import { store } from './store';
 
 class App extends Component {
     state = {
@@ -34,24 +37,8 @@ class App extends Component {
             localStorage.removeItem('id');
         });
         event.preventDefault();
+        this.props.history.replace('/')
     }
-
-    componentDidMount() {
-        // if (!this.bottom) window.addEventListener('scroll', this.handleScroll, true);
-    };
-
-    componentWillUnmount() {
-        // window.removeEventListener('scroll', this.handleScroll, true);
-    };
-
-    handleScroll = (event) => {
-        // if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
-        //     console.log("bottom");
-        //     this.setState({
-        //         displayLoader: true,
-        //     });
-        // }
-    };
 
     handleModalClose = () => {
         this.setState({
@@ -65,14 +52,28 @@ class App extends Component {
             //Сделать Боковой значек
             //На сервере, в seeds добавить flowing & flowers
             //Cделать profileContainer
+            //margin снизу для body
+            //Разобраться с route 4
             <Fragment>
-                <p>Corbin78@gmail.com</p>
-                <button onClick={this.handleSignOut}>Sign Out</button>
-                {!token && <Auth onSuccess={this.handleSuccess} />}
+                <p>Jovanny_Sauer@gmail.com</p>
+                {/* <CommentsHoc /> */}
+                {token && <button onClick={this.handleSignOut}>Sign Out</button>}
+                {/* {!token && <Auth onSuccess={this.handleSuccess} />} */}
+                <Link to='/'>Home</Link>
+                <Link to='/auth'>Auth</Link>
+                {/* {token && <Profile token={token} id={id} />} */}
+                <Switch>
+                    {/* {exact - cтрогое сравнение} */}
+                    {/* <Route path='/auth' component={<Auth onSuccess={this.handleSuccess} />} exact /> */}
+                    <Route path='/' render={(props) => (
+                        <GalleryContainer {...props} />
+                    )} />
+                    <Route path='/auth' render={(props) => (
+                        <Auth {...props} onSuccess={this.handleSuccess} />
+                    )} />
+                </Switch>
                 {token &&
                     <Fragment>
-                        <Profile token={token} id={id} />
-                        <GalleryContainer token={token} />
                         {isModalVisible &&
                             <Modal onClose={this.handleModalClose} title="Hi! I'm modal">
                                 <div>A circular color picker component also named color-wheel performed with react and pure svg. Mobile compatible.</div>
@@ -85,4 +86,11 @@ class App extends Component {
     }
 }
 
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
+);
